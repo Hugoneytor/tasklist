@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { TodoItem } from "./TodoItem";
 
 export const TodoApp = () =>{
 
@@ -16,14 +17,23 @@ export const TodoApp = () =>{
       completed: false,
     }
     setTodos([...todos, newTodo])
+    setTitle("")
   }
 
   return (
     <div className="todoContainer">
       <form className="todoCreateForm" onSubmit={onHandleSubmit}>
-        <input type="text" className="todoInput" onChange={onHandleInputChange}/>
+        <input type="text" className="todoInput" onChange={onHandleInputChange} value={title}/>
         <input type="submit" value="Create Todo" className="buttonCreate"/>
       </form>
+
+      <div className="todosContainer">
+        {
+          todos.map((todo)=>{
+            return <TodoItem key={todo.id} {...todo}/>
+          })
+        }
+      </div>
 
     </div>
   )
